@@ -33,8 +33,8 @@ namespace Server
         };
         public static List<User> UserList = new List<User>();
         public static Socket ServerSocket;
-        public const string Host = "127.0.0.1";
-        public const int Port = 2222;
+        public static string Host;
+        public static int Port;
         public static bool Work = true;
 
       
