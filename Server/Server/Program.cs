@@ -51,7 +51,7 @@ namespace Server
             Server.ServerSocket = new Socket(address.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             Server.ServerSocket.Bind(new IPEndPoint(address, Server.Port));
             Server.ServerSocket.Listen(100);
-            Console.WriteLine($"Server has been started on {Server.Host}:{Server.Host}");
+            Console.WriteLine($"Server has been started on {Server.Host}:{Server.Port}");
             Console.WriteLine("Waiting for connections...");
             while (Server.Work)
             {

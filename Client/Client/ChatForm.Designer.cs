@@ -44,6 +44,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.ServerStatusLabel = new System.Windows.Forms.Label();
             this.ecdhchecker = new System.Windows.Forms.CheckBox();
+            this.IPEnteringBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // enterChat
@@ -53,7 +54,7 @@
             this.enterChat.Enabled = false;
             this.enterChat.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.enterChat.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.enterChat.Location = new System.Drawing.Point(451, 4);
+            this.enterChat.Location = new System.Drawing.Point(470, 4);
             this.enterChat.Name = "enterChat";
             this.enterChat.Size = new System.Drawing.Size(107, 23);
             this.enterChat.TabIndex = 0;
@@ -81,7 +82,7 @@
             this.nicknameData.ForeColor = System.Drawing.Color.DodgerBlue;
             this.nicknameData.Location = new System.Drawing.Point(257, 5);
             this.nicknameData.Name = "nicknameData";
-            this.nicknameData.Size = new System.Drawing.Size(186, 23);
+            this.nicknameData.Size = new System.Drawing.Size(207, 23);
             this.nicknameData.TabIndex = 2;
             // 
             // chatBox
@@ -94,7 +95,7 @@
             this.chatBox.Location = new System.Drawing.Point(7, 51);
             this.chatBox.Name = "chatBox";
             this.chatBox.ReadOnly = true;
-            this.chatBox.Size = new System.Drawing.Size(386, 301);
+            this.chatBox.Size = new System.Drawing.Size(408, 313);
             this.chatBox.TabIndex = 3;
             this.chatBox.Text = "";
             // 
@@ -106,9 +107,9 @@
             this.userList.ForeColor = System.Drawing.Color.DodgerBlue;
             this.userList.FormattingEnabled = true;
             this.userList.ItemHeight = 14;
-            this.userList.Location = new System.Drawing.Point(399, 54);
+            this.userList.Location = new System.Drawing.Point(421, 51);
             this.userList.Name = "userList";
-            this.userList.Size = new System.Drawing.Size(156, 326);
+            this.userList.Size = new System.Drawing.Size(156, 340);
             this.userList.TabIndex = 4;
             // 
             // label2
@@ -127,7 +128,7 @@
             this.label3.BackColor = System.Drawing.Color.White;
             this.label3.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label3.Location = new System.Drawing.Point(399, 37);
+            this.label3.Location = new System.Drawing.Point(424, 35);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(144, 14);
             this.label3.TabIndex = 6;
@@ -139,9 +140,9 @@
             this.messageData.Enabled = false;
             this.messageData.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.messageData.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.messageData.Location = new System.Drawing.Point(7, 358);
+            this.messageData.Location = new System.Drawing.Point(7, 366);
             this.messageData.Name = "messageData";
-            this.messageData.Size = new System.Drawing.Size(386, 22);
+            this.messageData.Size = new System.Drawing.Size(408, 22);
             this.messageData.TabIndex = 7;
             this.messageData.KeyUp += new System.Windows.Forms.KeyEventHandler(this.messageData_KeyUp);
             // 
@@ -166,7 +167,7 @@
             this.rsachecker.Enabled = false;
             this.rsachecker.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.rsachecker.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.rsachecker.Location = new System.Drawing.Point(7, 384);
+            this.rsachecker.Location = new System.Drawing.Point(7, 397);
             this.rsachecker.Name = "rsachecker";
             this.rsachecker.Size = new System.Drawing.Size(134, 18);
             this.rsachecker.TabIndex = 9;
@@ -178,7 +179,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(396, 384);
+            this.label4.Location = new System.Drawing.Point(417, 399);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 15);
             this.label4.TabIndex = 10;
@@ -189,7 +190,7 @@
             this.ServerStatusLabel.AutoSize = true;
             this.ServerStatusLabel.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ServerStatusLabel.ForeColor = System.Drawing.Color.Crimson;
-            this.ServerStatusLabel.Location = new System.Drawing.Point(450, 384);
+            this.ServerStatusLabel.Location = new System.Drawing.Point(467, 400);
             this.ServerStatusLabel.Name = "ServerStatusLabel";
             this.ServerStatusLabel.Size = new System.Drawing.Size(80, 15);
             this.ServerStatusLabel.TabIndex = 11;
@@ -202,7 +203,7 @@
             this.ecdhchecker.Enabled = false;
             this.ecdhchecker.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ecdhchecker.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.ecdhchecker.Location = new System.Drawing.Point(147, 384);
+            this.ecdhchecker.Location = new System.Drawing.Point(147, 397);
             this.ecdhchecker.Name = "ecdhchecker";
             this.ecdhchecker.Size = new System.Drawing.Size(144, 18);
             this.ecdhchecker.TabIndex = 12;
@@ -210,13 +211,28 @@
             this.ecdhchecker.UseVisualStyleBackColor = false;
             this.ecdhchecker.CheckedChanged += new System.EventHandler(this.ECDHStatusChanged);
             // 
+            // IPEnteringBox
+            // 
+            this.IPEnteringBox.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.IPEnteringBox.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.IPEnteringBox.FormattingEnabled = true;
+            this.IPEnteringBox.Items.AddRange(new object[] {
+            "127.0.0.1:2222"});
+            this.IPEnteringBox.Location = new System.Drawing.Point(292, 394);
+            this.IPEnteringBox.Name = "IPEnteringBox";
+            this.IPEnteringBox.Size = new System.Drawing.Size(123, 22);
+            this.IPEnteringBox.TabIndex = 13;
+            this.IPEnteringBox.Text = "127.0.0.1:2222";
+            this.IPEnteringBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.IPAdressBox_KeyUp);
+            // 
             // ChatForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(561, 407);
+            this.ClientSize = new System.Drawing.Size(580, 422);
+            this.Controls.Add(this.IPEnteringBox);
             this.Controls.Add(this.ecdhchecker);
             this.Controls.Add(this.ServerStatusLabel);
             this.Controls.Add(this.label4);
@@ -263,6 +279,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label ServerStatusLabel;
         private System.Windows.Forms.CheckBox ecdhchecker;
+        private System.Windows.Forms.ComboBox IPEnteringBox;
     }
 }
 

@@ -80,16 +80,15 @@ namespace Client
 
         private void ChatForm_Load(object sender, EventArgs e)
         {
-            ConnectingThread = new Thread(ConnectToServer);
-            ConnectingThread.IsBackground = true;
-            ConnectingThread.Start();
         }
 
         private void ConnectToServer()
         {
             IPAddress temp = IPAddress.Parse(HostIP);
             ServerSocket = new Socket(temp.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-            while (true)
+            System.Diagnostics.Stopwatch Watch = new System.Diagnostics.Stopwatch();
+            Watch.Start();
+            while (Watch.ElapsedMilliseconds <= 4000)
             {
                 try
                 {
@@ -117,7 +116,14 @@ namespace Client
                 });
             }
             else
-                AddMessage("Связь с сервером не установлена.");
+                Invoke((MethodInvoker)delegate
+                {
+                    IPEnteringBox.Enabled = true;
+                    ServerStatusLabel.Text = "Недоступно";
+                    ServerStatusLabel.ForeColor = Color.Crimson;
+
+                });
+
 
         }
 
@@ -254,6 +260,7 @@ namespace Client
             enterChat.Enabled = false;
             rsachecker.Enabled = false;
             ecdhchecker.Enabled = false;
+            IPEnteringBox.Enabled = true;
         }
 
         private void enterChat_Click(object sender, EventArgs e)
@@ -336,6 +343,25 @@ namespace Client
 
         }
 
+        private void IPAdressBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyData == Keys.Enter)
+            {
+                ServerStatusLabel.Text = "Подключение...";
+                ServerStatusLabel.ForeColor = Color.DarkBlue;
+                string[] IPAdress;
+                if (!IPValidation(IPEnteringBox.Text, out IPAdress)) return;
+                IPEnteringBox.Enabled = false;
+                HostIP = IPAdress[0];
+                HostPort = Int32.Parse(IPAdress[1]);
+                ConnectingThread = new Thread(ConnectToServer);
+                ConnectingThread.IsBackground = true;
+                ConnectingThread.Start();
+
+
+            }
+        }
+
         private void ECDHStatusChanged(object sender, EventArgs e)
         {
             ECDHStatus = ecdhchecker.Checked;
@@ -346,6 +372,56 @@ namespace Client
             }
             else AddMessage("Шифрование ECDH - выключено", "Red");
         }
+
+        private bool IPValidation(string Adress, out string[] Data)
+        {
+            if (!Adress.Contains(':'))
+            {
+                ServerStatusLabel.Text = "Неверный IP!";
+                ServerStatusLabel.ForeColor = Color.Crimson;
+                Data = null;
+                return false;
+            }
+            Adress.Trim();
+            Data = Adress.Split(':');
+
+            if (!Data[0].Contains('.'))
+            {
+                ServerStatusLabel.Text = "Неверный IP!";
+                ServerStatusLabel.ForeColor = Color.Crimson;
+                return false;
+            }
+
+            string[] IpNumbers = Data[0].Split('.');
+
+            if (IpNumbers.Length != 4)
+            {
+                ServerStatusLabel.Text = "Неверный IP!";
+                ServerStatusLabel.ForeColor = Color.Crimson;
+                return false;
+            }
+
+            foreach (string item in IpNumbers)
+            {
+                int num;
+                if (!int.TryParse(item, out num) || num < 0 || num > 255)
+                {
+                    ServerStatusLabel.Text = "Неверный IP!";
+                    ServerStatusLabel.ForeColor = Color.Crimson;
+                    return false;
+                }
+            }
+            int port;
+            if (!int.TryParse(Data[1], out port) || port < 1 || port > 65535)
+            {
+                ServerStatusLabel.Text = "Неверный IP!";
+                ServerStatusLabel.ForeColor = Color.Crimson;
+                return false;
+            }
+            return true;
+
+        }
+
     }
 }
 
