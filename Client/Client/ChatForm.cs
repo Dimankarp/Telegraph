@@ -278,8 +278,11 @@ namespace Client
 
         private void ChatForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (ServerSocket.Connected)
+            try
+            {
                 Send("#endsession");
+            }
+            catch { }
         }
 
         private void messageData_KeyUp(object sender, KeyEventArgs e)
@@ -345,7 +348,7 @@ namespace Client
 
         private void IPAdressBox_KeyUp(object sender, KeyEventArgs e)
         {
-            if(e.KeyData == Keys.Enter)
+            if (e.KeyData == Keys.Enter)
             {
                 ServerStatusLabel.Text = "Подключение...";
                 ServerStatusLabel.ForeColor = Color.DarkBlue;
